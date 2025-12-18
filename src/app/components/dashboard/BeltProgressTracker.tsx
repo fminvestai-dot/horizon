@@ -41,16 +41,19 @@ export default function BeltProgressTracker({ beltProgress }: BeltProgressTracke
     : 100;
 
   return (
-    <div className="bg-zen-black border border-zen-gray rounded-lg p-6">
-      <h2 className="text-xl font-bold font-mono mb-6">Belt Progress</h2>
+    <div className="relative backdrop-blur-xl bg-gradient-to-br from-zen-dark/80 to-zen-black/80 border border-zen-gray/20 rounded-2xl p-6 shadow-glass hover:shadow-glow-lg transition-all duration-500">
+      <div className="absolute inset-0 bg-glass rounded-2xl opacity-50" />
+      <h2 className="relative text-xl font-bold font-mono mb-6 bg-gradient-to-r from-zen-white to-zen-gray-light bg-clip-text text-transparent">Belt Progress</h2>
 
       {/* Current Belt */}
-      <div className="mb-6">
+      <div className="relative mb-6 p-4 rounded-xl bg-gradient-to-br from-zen-accent/10 to-transparent border border-zen-accent/20">
         <div className="flex items-center gap-3 mb-2">
-          <span className="text-4xl">{beltEmojis[beltProgress.currentBelt]}</span>
+          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-zen-accent/20 to-zen-accent/5 flex items-center justify-center">
+            <span className="text-3xl">{beltEmojis[beltProgress.currentBelt]}</span>
+          </div>
           <div>
             <h3 className="text-lg font-semibold">{currentBeltReq.displayName}</h3>
-            <p className="text-sm text-zen-gray">{currentBeltReq.description}</p>
+            <p className="text-sm text-zen-gray-light">{currentBeltReq.description}</p>
           </div>
         </div>
       </div>

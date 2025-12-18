@@ -20,24 +20,29 @@ export default function HorizonDashboard({ horizons }: HorizonDashboardProps) {
   const h1Horizons = horizons.filter((h) => h.level === 'H1');
 
   const HorizonCard = ({ horizon }: { horizon: Horizon }) => (
-    <div className="bg-zen-black border border-zen-gray rounded-lg p-4 hover:border-zen-accent transition-colors cursor-pointer">
-      <div className="flex items-start justify-between mb-2">
-        <span className="font-mono text-xs text-zen-gray">{horizon.id}</span>
-        <span
-          className={`text-xs px-2 py-0.5 border rounded-full ${
-            quadrantColors[horizon.quadrant]
-          }`}
-        >
-          {horizon.quadrant}
-        </span>
+    <div className="group relative backdrop-blur-xl bg-gradient-to-br from-zen-dark/60 to-zen-black/60 border border-zen-gray/20 rounded-xl p-5 hover:border-zen-accent/50 hover:shadow-glow transition-all duration-300 cursor-pointer overflow-hidden">
+      <div className="absolute inset-0 bg-glass opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="relative">
+        <div className="flex items-start justify-between mb-3">
+          <span className="font-mono text-xs font-semibold text-zen-accent px-2 py-1 bg-zen-accent/10 rounded-md">{horizon.id}</span>
+          <span
+            className={`text-xs px-3 py-1 border rounded-full backdrop-blur-sm ${
+              quadrantColors[horizon.quadrant]
+            } bg-black/20`}
+          >
+            {horizon.quadrant}
+          </span>
+        </div>
+        <h3 className="font-semibold mb-2 group-hover:text-zen-accent transition-colors">{horizon.title}</h3>
+        {horizon.description && (
+          <p className="text-sm text-zen-gray-light line-clamp-2">{horizon.description}</p>
+        )}
+        {horizon.status === 'achieved' && (
+          <span className="inline-flex items-center gap-1 mt-3 text-xs text-belt-green bg-belt-green/10 px-2 py-1 rounded-full">
+            <span>✓</span> Achieved
+          </span>
+        )}
       </div>
-      <h3 className="font-semibold mb-1">{horizon.title}</h3>
-      {horizon.description && (
-        <p className="text-sm text-zen-gray line-clamp-2">{horizon.description}</p>
-      )}
-      {horizon.status === 'achieved' && (
-        <span className="inline-block mt-2 text-xs text-green-500">✓ Achieved</span>
-      )}
     </div>
   );
 
