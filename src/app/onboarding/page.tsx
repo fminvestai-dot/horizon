@@ -51,31 +51,40 @@ export default function OnboardingPage() {
       // Create all horizons in database
       const allHorizons = [
         ...h3Horizons.map((h, i) => ({
-          ...h,
           id: `H3-${String(i + 1).padStart(2, '0')}`,
-          level: 'H3' as const,
           user_id: user.id,
+          level: 'H3',
+          title: h.title || '',
+          description: h.description || null,
+          quadrant: h.quadrant || 'Business',
+          status: 'active',
+          parent_horizon_id: h.parentHorizonId || null,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
-          status: 'active' as const,
         })),
         ...h2Horizons.map((h, i) => ({
-          ...h,
           id: `H2-${String(i + 1).padStart(2, '0')}`,
-          level: 'H2' as const,
           user_id: user.id,
+          level: 'H2',
+          title: h.title || '',
+          description: h.description || null,
+          quadrant: h.quadrant || 'Business',
+          status: 'active',
+          parent_horizon_id: h.parentHorizonId || null,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
-          status: 'active' as const,
         })),
         ...h1Horizons.map((h, i) => ({
-          ...h,
           id: `H1-${String(i + 1).padStart(2, '0')}`,
-          level: 'H1' as const,
           user_id: user.id,
+          level: 'H1',
+          title: h.title || '',
+          description: h.description || null,
+          quadrant: h.quadrant || 'Business',
+          status: 'active',
+          parent_horizon_id: h.parentHorizonId || null,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
-          status: 'active' as const,
         })),
       ];
 
@@ -84,7 +93,10 @@ export default function OnboardingPage() {
         .from('horizons')
         .insert(allHorizons);
 
-      if (horizonsError) throw horizonsError;
+      if (horizonsError) {
+        console.error('Horizons insert error:', horizonsError);
+        throw horizonsError;
+      }
 
       // Update user profile with preferences and first log date
       const { error: profileError } = await supabase
@@ -114,7 +126,10 @@ export default function OnboardingPage() {
         })
         .eq('id', user.id);
 
-      if (profileError) throw profileError;
+      if (profileError) {
+        console.error('Profile update error:', profileError);
+        throw profileError;
+      }
 
       setCurrentStep('complete');
 
