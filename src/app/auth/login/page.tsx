@@ -50,14 +50,24 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zen-black flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-zen-black via-zen-darker to-zen-dark relative overflow-hidden flex items-center justify-center p-4">
+      {/* Animated background */}
+      <div className="absolute inset-0 bg-dot-pattern bg-dot-pattern-size opacity-20" />
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-zen-accent/10 rounded-full blur-3xl animate-pulse-slow" />
+      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-zen-accent/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+
+      <div className="relative w-full max-w-md animate-fade-in">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold font-mono mb-2">QLM Hansei OS</h1>
-          <p className="text-zen-gray">Sign in to your account</p>
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-zen-accent to-zen-accent-dark shadow-glow mb-4">
+            <span className="text-2xl font-bold text-zen-black">H</span>
+          </div>
+          <h1 className="text-4xl font-bold font-mono mb-2 bg-gradient-to-r from-zen-white via-zen-gray-light to-zen-white bg-clip-text text-transparent">
+            QLM Hansei OS
+          </h1>
+          <p className="text-zen-gray-light">Sign in to your account</p>
         </div>
 
-        <div className="bg-zen-black border border-zen-gray rounded-lg p-8">
+        <div className="backdrop-blur-xl bg-gradient-to-br from-zen-dark/80 to-zen-black/80 border border-zen-gray/20 rounded-2xl p-8 shadow-glass">
           <form onSubmit={handleLogin} className="space-y-6">
             {error && (
               <div className="bg-red-900/20 border border-red-500 text-red-500 px-4 py-3 rounded text-sm">
@@ -98,7 +108,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-zen-accent text-zen-black font-medium py-3 rounded hover:opacity-90 transition-opacity disabled:opacity-50"
+              className="w-full bg-accent-gradient text-zen-black font-medium py-3 rounded-xl hover:shadow-glow transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
